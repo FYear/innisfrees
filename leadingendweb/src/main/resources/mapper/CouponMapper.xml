@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ICouponDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Coupon" >
+    <id column="coupon _id" property="couponId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="max_ price" property="maxPrice" jdbcType="REAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    "coupon _id", price, "max_ price", name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupon
+    where "coupon _id" = #{couponId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from coupon
+    where "coupon _id" = #{couponId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Coupon" >
+    insert into coupon ("coupon _id", price, "max_ price", 
+      name)
+    values (#{couponId,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{maxPrice,jdbcType=REAL}, 
+      #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Coupon" >
+    insert into coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        "coupon _id",
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="maxPrice != null" >
+        "max_ price",
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="maxPrice != null" >
+        #{maxPrice,jdbcType=REAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Coupon" >
+    update coupon
+    <set >
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="maxPrice != null" >
+        "max_ price" = #{maxPrice,jdbcType=REAL},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "coupon _id" = #{couponId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Coupon" >
+    update coupon
+    set price = #{price,jdbcType=REAL},
+      "max_ price" = #{maxPrice,jdbcType=REAL},
+      name = #{name,jdbcType=VARCHAR}
+    where "coupon _id" = #{couponId,jdbcType=INTEGER}
+  </update>
+</mapper>

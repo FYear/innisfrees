@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IProduct_relationDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Product_relation" >
+    <id column="product_relation_id" property="productRelationId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    "product_relation_id", name, parentId, type, img
+  </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT * FROM product_relation
+    <where>
+      <if test="productRelationId != null" >
+         product_relation_id = #{productRelationId}
+      </if>
+      <if test="name != null" >
+      and  name = #{name}
+      </if>
+      <if test="parentid != null" >
+       and parentId = #{parentid}
+      </if>
+      <if test="type != null" >
+      and  type = #{type}
+      </if>
+      <if test="img != null" >
+        and  img = #{img}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from product_relation
+    where product_relation_id = #{productRelationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_relation
+    where "product_relation_id" = #{productRelationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Product_relation" >
+    insert into product_relation ("product_relation_id", name, parentId,
+      type, img)
+    values (#{productRelationId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Product_relation" >
+    insert into product_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productRelationId != null" >
+        "product_relation_id",
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productRelationId != null" >
+        #{productRelationId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Product_relation" >
+    update product_relation
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "product_relation_id" = #{productRelationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Product_relation" >
+    update product_relation
+    set name = #{name,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR}
+    where "product_relation_id" = #{productRelationId,jdbcType=INTEGER}
+  </update>
+</mapper>

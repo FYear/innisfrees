@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IDetailed_productDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Detailed_product" >
+    <id column="detailed_product_id" property="detailedProductId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="skin" property="skin" jdbcType="VARCHAR" />
+    <result column="component" property="component" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    detailed_product_id, pid, skin, component,img
+  </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
+  <select id="selectPidKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    *
+    from detailed_product
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from detailed_product
+    where "detailed_product_id" = #{detailedProductId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from detailed_product
+    where "detailed_product_id" = #{detailedProductId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Detailed_product" >
+    insert into detailed_product ("detailed_product_id", pid, skin,
+      component, img)
+    values (#{detailedProductId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{skin,jdbcType=VARCHAR}, 
+      #{component,jdbcType=VARCHAR}, #{img,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Detailed_product" >
+    insert into detailed_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailedProductId != null" >
+        "detailed_product_id",
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="skin != null" >
+        skin,
+      </if>
+      <if test="component != null" >
+        component,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailedProductId != null" >
+        #{detailedProductId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="skin != null" >
+        #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Detailed_product" >
+    update detailed_product
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="skin != null" >
+        skin = #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where "detailed_product_id" = #{detailedProductId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.entity.Detailed_product" >
+    update detailed_product
+    set pid = #{pid,jdbcType=INTEGER},
+      skin = #{skin,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      img = #{img,jdbcType=LONGVARCHAR}
+    where "detailed_product_id" = #{detailedProductId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Detailed_product" >
+    update detailed_product
+    set pid = #{pid,jdbcType=INTEGER},
+      skin = #{skin,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR}
+    where "detailed_product_id" = #{detailedProductId,jdbcType=INTEGER}
+  </update>
+</mapper>

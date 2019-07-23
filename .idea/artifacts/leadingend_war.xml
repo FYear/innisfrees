@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="leadingend:war">
+    <output-path>$PROJECT_DIR$/leadingend/target</output-path>
+    <root id="archive" name="leadingend.war">
+      <element id="artifact" artifact-name="leadingend:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IOrder_detailDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Order_detail" >
+    <id column="order_detail_id" property="orderDetailId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="cost" property="cost" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_detail_id, order_id, pid, quantity, cost
+  </sql>
+  <select id="selectAllIf" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+   *
+    from order_detail
+    <where>
+    	<if test="orderDetailId != null">
+    		order_detail_id = #{orderDetailId}
+    	</if>
+    	<if test="orderId != null">
+    	and	order_id = #{orderId}
+    	</if>
+    	<if test="pid != null">
+    	and	pid = #{pid}
+    	</if>
+    </where>
+   
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_detail
+    where "order_detail_id" = #{orderDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Order_detail" >
+    insert into order_detail ("order_detail _id", "order _id", pid, 
+      quantity, cost)
+    values (#{orderDetailId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{quantity,jdbcType=INTEGER}, #{cost,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Order_detail" >
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderDetailId != null" >
+        order_detail_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderDetailId != null" >
+        #{orderDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Order_detail" >
+    update order_detail
+    <set >
+      <if test="orderId != null" >
+        "order_id" = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=REAL},
+      </if>
+    </set>
+    where "order_detail_id" = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Order_detail" >
+    update order_detail
+    set "order_id" = #{orderId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=REAL}
+    where "order_detail_id" = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+</mapper>

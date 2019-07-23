@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IUser_addressDao" >
+  <resultMap id="BaseResultMap" type="com.entity.User_address" >
+    <id column="user_address_id" property="userAddressId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="isDefault" property="isdefault" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="readdress_user" property="readdressUser" jdbcType="VARCHAR" />
+    <result column="readdress_phone" property="readdressPhone" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_address_id, uid, address, isDefault, remark, readdress_user, readdress_phone
+  </sql>
+  <select id="selectAllByIf" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    *
+    from user_address
+    <where>
+      <if test="userAddressId != null" >
+        user_address_id	=#{userAddressId}
+      </if>
+      <if test="uid != null" >
+        and uid=#{uid}
+      </if>
+      <if test="address != null" >
+        and address=#{address}
+      </if>
+      <if test="isdefault != null" >
+        and isDefault=#{isdefault}
+      </if>
+      <if test="remark != null" >
+        and remark=#{remark}
+      </if>
+      <if test="readdressUser != null" >
+        and readdress_user=#{readdressUser}
+      </if>
+      <if test="readdressPhone != null" >
+        and readdress_phone=#{readdressPhone}
+      </if>
+    </where>
+
+  </select>
+  <select id="selectUid" resultMap="BaseResultMap"  >
+    select * from user_address
+   <where>
+     <if test="userAddressId != null" >
+       user_address_id=#{userAddressId}
+     </if>
+     <if test="uid != null" >
+      and uid = #{uid,jdbcType=INTEGER}
+     </if>
+     <if test="address != null" >
+     and  address = #{address,jdbcType=VARCHAR}
+     </if>
+     <if test="isdefault != null" >
+       and isDefault = #{isdefault,jdbcType=INTEGER}
+     </if>
+     <if test="remark != null" >
+       and  remark = #{remark,jdbcType=VARCHAR}
+     </if>
+     <if test="readdressUser != null" >
+       and  readdress_user = #{readdressUser,jdbcType=VARCHAR}
+     </if>
+     <if test="readdressPhone != null" >
+       and readdress_phone = #{readdressPhone,jdbcType=INTEGER}
+     </if>
+   </where>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_address
+    where user_address_id = #{userAddressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_address
+    where user_address_id = #{userAddressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.User_address" >
+    insert into user_address (user_address_id, uid, address, 
+      isDefault, remark, readdress_user, 
+      readdress_phone)
+    values (#{userAddressId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{isdefault,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{readdressUser,jdbcType=VARCHAR}, 
+      #{readdressPhone,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.User_address" >
+    insert into user_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userAddressId != null" >
+        user_address_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="isdefault != null" >
+        isDefault,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="readdressUser != null" >
+        readdress_user,
+      </if>
+      <if test="readdressPhone != null" >
+        readdress_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userAddressId != null" >
+        #{userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isdefault != null" >
+        #{isdefault,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressUser != null" >
+        #{readdressUser,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressPhone != null" >
+        #{readdressPhone,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.User_address" >
+    update user_address
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isdefault != null" >
+        isDefault = #{isdefault,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressUser != null" >
+        readdress_user = #{readdressUser,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressPhone != null" >
+        readdress_phone = #{readdressPhone,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_address_id = #{userAddressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.User_address" >
+    update user_address
+    set uid = #{uid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      isDefault = #{isdefault,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      readdress_user = #{readdressUser,jdbcType=VARCHAR},
+      readdress_phone = #{readdressPhone,jdbcType=INTEGER}
+    where user_address_id = #{userAddressId,jdbcType=INTEGER}
+  </update>
+</mapper>

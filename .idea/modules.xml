@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/innisfrees.iml" filepath="$PROJECT_DIR$/innisfrees.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadingendweb/leadingendweb.iml" filepath="$PROJECT_DIR$/leadingendweb/leadingendweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/supporterweb/supporterweb.iml" filepath="$PROJECT_DIR$/supporterweb/supporterweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/userInfoweb/userInfoweb.iml" filepath="$PROJECT_DIR$/userInfoweb/userInfoweb.iml" />
+    </modules>
+  </component>
+</project>

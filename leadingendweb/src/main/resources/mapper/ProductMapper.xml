@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IProductDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Product" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="day" property="day" jdbcType="TIMESTAMP" />
+    <result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+    <result column="state1" property="state1" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="discount_price" property="discountPrice" jdbcType="REAL" />
+    <result column="give_product_id" property="giveProductId" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="volume" property="volume" jdbcType="VARCHAR" />
+    <result column="categoryLevel1Id" property="categorylevel1id" jdbcType="INTEGER" />
+    <result column="categoryLevel2Id" property="categorylevel2id" jdbcType="INTEGER" />
+    <result column="skincare_id" property="skincareId" jdbcType="INTEGER" />
+    <result column="effect" property="effect" jdbcType="VARCHAR" />
+    <result column="product_img" property="productImg" jdbcType="VARCHAR" />
+    <result column="gnum" property="gnum" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="gimg" property="gimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, product_id, name, title, day, "sales_ volume", state1, price, discount_price,
+    "give_product_id", state, volume, categoryLevel1Id, categoryLevel2Id, skincare_id,
+    effect, product_img,gnum,gname,gimg
+  </sql>
+
+  <select id="selectAllByIf" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT
+    p.*,gp.name AS gname,gp.num AS gnum,gp.img AS gimg
+    FROM product p LEFT JOIN give_product gp
+    ON p.give_product_id =gp.give_product_id
+    <where>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="name3 != null">
+        and	name LIKE concat(concat('%',#{name3}),'%')
+      </if>
+      <if test="state1 != null">
+        and	state1 = #{state1}
+      </if>
+      <if test="giveProductId != null">
+        and	give_product_id = #{giveProductId}
+      </if>
+      <if test="categoryLevel1Id != null">
+        and	categoryLevel1Id = #{categoryLevel1Id}
+      </if>
+      <if test="categoryLevel2Id != null">
+        and	categoryLevel2Id = #{categoryLevel2Id}
+      </if>
+      <if test="skincareId != null">
+        and	skincare_id = #{skincareId}
+      </if>
+      <if test="price != null">
+        and	price &lt;= #{price} LIMIT 3
+      </if>
+    </where>
+  </select>
+
+  <select id="selectActive" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT * FROM product WHERE categoryLevel1Id=#{parentid}  ORDER BY sales_volume
+  </select>
+
+  <select id="selectEffect" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT * FROM product WHERE effect=#{effect}
+  </select>
+
+  <select id="selectSkincare" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT * FROM product WHERE skincare_id=#{skincareId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT * from  product
+    <where>
+      <if test="pid != null" >
+        pid= #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="productId != null" >
+       and product_id= #{productId,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+      and name like concat(concat('%',#{name}),'%')
+      </if>
+      <if test="title != null" >
+       and title= #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="day != null" >
+       and day= #{day,jdbcType=TIMESTAMP}
+      </if>
+      <if test="salesVolume != null" >
+       and sales_volume= #{salesVolume,jdbcType=INTEGER}
+      </if>
+      <if test="state1 != null" >
+       and state1= #{state1,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null" >
+       and price= #{price,jdbcType=REAL}
+      </if>
+      <if test="discountPrice != null" >
+       and discount_price=#{discountPrice,jdbcType=REAL}
+      </if>
+      <if test="giveProductId != null" >
+       and give_product_id= #{giveProductId,jdbcType=INTEGER}
+      </if>
+      <if test="state != null" >
+        and state=#{state,jdbcType=INTEGER}
+      </if>
+      <if test="volume != null" >
+       and volume= #{volume,jdbcType=VARCHAR}
+      </if>
+      <if test="categorylevel1id != null" >
+       and categoryLevel1Id= #{categorylevel1id,jdbcType=INTEGER}
+      </if>
+      <if test="categorylevel2id != null" >
+        and categoryLevel2Id=#{categorylevel2id,jdbcType=INTEGER}
+      </if>
+      <if test="skincareId != null" >
+        and skincare_id=#{skincareId,jdbcType=INTEGER}
+      </if>
+      <if test="effect != null" >
+        and effect=#{effect,jdbcType=VARCHAR}
+      </if>
+      <if test="productImg != null" >
+        and product_img=#{productImg,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="moerselect" resultMap="BaseResultMap">
+    SELECT * FROM product ORDER BY sales_volume DESC
+  </select>
+  <select id="newselect" resultMap="BaseResultMap">
+    select * from  product  order by day desc
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+   *
+    from product
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Product" >
+    insert into product (pid, product_id, name, 
+      title, day, "sales_volume",
+      state1, price, discount_price, 
+      "give_product_id", state, volume,
+      categoryLevel1Id, categoryLevel2Id, skincare_id, 
+      effect, product_img)
+    values (#{pid,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{day,jdbcType=TIMESTAMP}, #{salesVolume,jdbcType=INTEGER}, 
+      #{state1,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{discountPrice,jdbcType=REAL}, 
+      #{giveProductId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{volume,jdbcType=VARCHAR}, 
+      #{categorylevel1id,jdbcType=INTEGER}, #{categorylevel2id,jdbcType=INTEGER}, #{skincareId,jdbcType=INTEGER}, 
+      #{effect,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="salesVolume != null" >
+        "sales_volume",
+      </if>
+      <if test="state1 != null" >
+        state1,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="discountPrice != null" >
+        discount_price,
+      </if>
+      <if test="giveProductId != null" >
+        "give_product_id",
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="categorylevel1id != null" >
+        categoryLevel1Id,
+      </if>
+      <if test="categorylevel2id != null" >
+        categoryLevel2Id,
+      </if>
+      <if test="skincareId != null" >
+        skincare_id,
+      </if>
+      <if test="effect != null" >
+        effect,
+      </if>
+      <if test="productImg != null" >
+        product_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesVolume != null" >
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="state1 != null" >
+        #{state1,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=REAL},
+      </if>
+      <if test="giveProductId != null" >
+        #{giveProductId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="categorylevel1id != null" >
+        #{categorylevel1id,jdbcType=INTEGER},
+      </if>
+      <if test="categorylevel2id != null" >
+        #{categorylevel2id,jdbcType=INTEGER},
+      </if>
+      <if test="skincareId != null" >
+        #{skincareId,jdbcType=INTEGER},
+      </if>
+      <if test="effect != null" >
+        #{effect,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        #{productImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Product" >
+    update product
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesVolume != null" >
+        "sales_volume" = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="state1 != null" >
+        state1 = #{state1,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="discountPrice != null" >
+        discount_price = #{discountPrice,jdbcType=REAL},
+      </if>
+      <if test="giveProductId != null" >
+        "give_product_id" = #{giveProductId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="categorylevel1id != null" >
+        categoryLevel1Id = #{categorylevel1id,jdbcType=INTEGER},
+      </if>
+      <if test="categorylevel2id != null" >
+        categoryLevel2Id = #{categorylevel2id,jdbcType=INTEGER},
+      </if>
+      <if test="skincareId != null" >
+        skincare_id = #{skincareId,jdbcType=INTEGER},
+      </if>
+      <if test="effect != null" >
+        effect = #{effect,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        product_img = #{productImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Product" >
+    update product
+    set product_id = #{productId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      day = #{day,jdbcType=TIMESTAMP},
+      "sales_volume" = #{salesVolume,jdbcType=INTEGER},
+      state1 = #{state1,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      discount_price = #{discountPrice,jdbcType=REAL},
+      "give_product_id" = #{giveProductId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=VARCHAR},
+      categoryLevel1Id = #{categorylevel1id,jdbcType=INTEGER},
+      categoryLevel2Id = #{categorylevel2id,jdbcType=INTEGER},
+      skincare_id = #{skincareId,jdbcType=INTEGER},
+      effect = #{effect,jdbcType=VARCHAR},
+      product_img = #{productImg,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

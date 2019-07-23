@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/App.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/SpringBootStartApplication.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/config" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IActivityDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/ICollection_productDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/ICommentDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/ICouponDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IDetailed_productDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IGive_productDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IOrderDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IOrder_detailDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IProductDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IProduct_relationDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IShareDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IShopping_cartDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/ISkincare_productDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IUser_addressDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/dao/IUser_infoDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/interceptor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IActivityService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/ICollection_productService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/ICommentService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/ICouponService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IDetailed_productService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IGive_productService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IOrderService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IOrder_detailService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IProductService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IProduct_relationService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IShareService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IShopping_cartService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/ISkincare_productService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/service/IUser_addressService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/utils/RedisClient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/java/com/utils/SerializeUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/application.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/logback-spring.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/ActivityMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Collection_productMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/CommentMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/CouponMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Detailed_productMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Give_productMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/OrderMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Order_detailMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/ProductMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Product_relationMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/ShareMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Shopping_cartMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/Skincare_productMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/leadingendweb/src/main/resources/mapper/User_infoMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/supporterweb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userInfoweb" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

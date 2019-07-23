@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IOrder1Dao" >
+  <resultMap id="BaseResultMap" type="com.entity.Order1" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="userAddress" property="useraddress" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="cost" property="cost" jdbcType="REAL" />
+    <result column="serialNumber" property="serialnumber" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="readdress_name" property="readdressName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, uid, userAddress, createTime, cost, serialNumber, state,remark,readdress_name
+  </sql>
+  
+  <select id="selectAllIf" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  SELECT o.*,u.user_name AS uname FROM order1 o INNER JOIN user_info u
+	ON o.`uid`=u.`uid`
+    <where>
+    	<if test="orderId!=null">
+    		order_id = #{orderId}
+    	</if>
+    	<if test="uid!=null">
+    	and	uid = #{uid}
+    	</if>
+    	<if test="serialNumber!=null">
+    	and	serialNumber = #{serialNumber} 
+    	</if>
+    	<if test="state!=null">
+    	and	state !=#{state}
+    	</if>
+    	<if test="state2!=null">
+    	and	state = #{state2}
+    	</if>
+    </where>
+  </select>
+  
+ 
+  <select id="selectOneWeek" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <!-- SELECT * FROM order1 where DATE_SUB(CURDATE(), INTERVAL 6 DAY) &lt; = createTime -->
+    SELECT * FROM order1 where
+    TO_DAYS(NOW()) - TO_DAYS(createTime) = #{num}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order1
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectMoneyIf" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT SUM(cost) FROM order1 
+    <where>
+    	<if test="now!=null">
+    		TO_DAYS(createTime) = TO_DAYS(NOW())
+    	</if>
+    	<if test="state!=null">
+    	and	state !=#{state}
+    	</if>
+    </where>
+    <!-- SELECT SUM(cost) FROM order1 
+    WHERE TO_DAYS(createTime) = TO_DAYS(NOW()) 
+    AND state !="等待付款" --> 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order1
+    where "order_id" = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Order1" >
+    insert into order1 ("order_id", uid, userAddress, 
+      createTime, cost, serialNumber, 
+      state,remark,readdress_name)
+    values (#{orderId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{useraddress,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{cost,jdbcType=REAL}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{readdressName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Order1" useGeneratedKeys="true" keyProperty="orderId">
+    insert into order1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="useraddress != null" >
+        userAddress,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="readdressName != null" >
+        readdress_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="useraddress != null" >
+        #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+       <if test="remark != null" >
+       #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressName != null" >
+        #{readdressName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Order1" >
+    update order1
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="useraddress != null" >
+        userAddress = #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+       remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readdressName != null" >
+        readdress_name = #{readdressName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Order1" >
+    update order1
+    set uid = #{uid,jdbcType=INTEGER},
+      userAddress = #{useraddress,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      cost = #{cost,jdbcType=REAL},
+      serialNumber = #{serialnumber,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      readdress_name = #{readdressName,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

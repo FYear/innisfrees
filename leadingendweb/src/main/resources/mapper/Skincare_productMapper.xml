@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ISkincare_productDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Skincare_product" >
+    <id column="skincare_product_id" property="skincareProductId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="iconClass" property="iconclass" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    skincare_product_id, name, iconClass, img
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+ SELECT * FROM skincare_product
+   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from skincare_product
+    where skincare_product_id = #{skincareProductId,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from skincare_product
+    where skincare_product_id = #{skincareProductId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Skincare_product" >
+    insert into skincare_product (skincare_product_id, name, iconClass,
+      img)
+    values (#{skincareProductId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{iconclass,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Skincare_product" >
+    insert into skincare_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skincareProductId != null" >
+        "skincare_product_id",
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="iconclass != null" >
+        iconClass,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skincareProductId != null" >
+        #{skincareProductId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null" >
+        #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Skincare_product" >
+    update skincare_product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null" >
+        iconClass = #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "skincare_product_id" = #{skincareProductId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Skincare_product" >
+    update skincare_product
+    set name = #{name,jdbcType=VARCHAR},
+      iconClass = #{iconclass,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR}
+    where "skincare_product_id" = #{skincareProductId,jdbcType=INTEGER}
+  </update>
+</mapper>
